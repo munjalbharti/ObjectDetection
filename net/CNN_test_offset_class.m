@@ -40,7 +40,7 @@ function [] = CNN_test_offset_class()
         orig_offsets={};
         images=[];
         
-       for i=1286:numel(val)
+       for i=1:numel(val)
           j= val(i);
         %  j=1353;
           name=sprintf('img_%d.png',i);

@@ -125,9 +125,9 @@ VOCopts.imgsetpath= fullfile(VOCPATH, 'ImageSets', 'Main' , 'val.txt');
              case 1 
                 [centers_y,centers_x,contri]=find_centers_connected_components(offset,opts.threshold);      
              case 2
-                 [centers_y,centers_x,contri]=find_centers_hough_voting(offset,opts.bin_size,opts.threshold,opts.non_m_win_size);           
-             case 3 
-                  [centers_y,centers_x,contri]= find_centers_mean_shift(offset,opts.threshold,opts.bandwidth,opts.iteration);
+                [centers_y,centers_x,contri]=find_centers_hough_voting(offset,opts.bin_size,opts.threshold,opts.non_m_win_size);           
+             case 3  
+                [centers_y,centers_x,contri]= find_centers_mean_shift(offset,opts.threshold,opts.bandwidth,opts.iteration);
            end
              
              

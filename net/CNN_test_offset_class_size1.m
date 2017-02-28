@@ -98,7 +98,7 @@ end
         
        for i=1:numel(val)
           j= val(i);
-        %  j=1353;
+       
           name=sprintf('img_%d.png',i);
    
           rgb=imdb.images{j};
@@ -117,9 +117,6 @@ end
                 im_ = gpuArray(im_) ;
              end
              
-        
-    
-
 
           tStart=tic;
        
@@ -127,15 +124,8 @@ end
           offset= gather(net.vars(predVar1).value)  ;
           
           offset=offset*256;
-          
-        
-   
-         % prediction= gather(net.vars(predVar1).value)  ;   
-         % offset=prediction(:,:,[22,23])*256;
-  
 
-            
-              switch method
+           switch method
               case 1
        
                  [centers_y,centers_x,contri]=find_centers_connected_components(offset,opts.threshold);      
@@ -145,7 +135,7 @@ end
               case 3 
 
                   [centers_y,centers_x,contri]= find_centers_mean_shift(offset,opts.threshold,opts.bandwidth,opts.iteration);
-              end
+           end
              
                
           tElapsed = toc(tStart);
@@ -199,10 +189,10 @@ end
              quiver([1:size(offset,2)],[1:size(offset,1)],offset(:,:,1),offset(:,:,2));
             
           
-               min_x=[];
-               min_y=[];
-               widths=[];
-               heights=[];
+              min_x=[];
+              min_y=[];
+              widths=[];
+              heights=[];
              
                %find min_x,min_y and use make_offset_fig
                
@@ -274,15 +264,7 @@ end
                
                     [count2,class2]= max(classes_count2);
                 
-                
-                %    if(class1 ~=1 )                    
-                %      avg_prob1=sum(probs_box(classes_box == class1))/count1;
-                %      avg_prob2= sum(prob_pred(ind(find(class_pred(ind) == class2))))/count2;
-                    
-                %      fprintf(fid1,'%s %f %f %f %f %f %f %f %f %f\n',name(1:end-4),min_cx,min_cy,max_cx,max_cy,avg_prob1,per_class_pixels1(class1),avg_prob2,per_class_pixels2(class2),total_contri_pixels/total_pixels);
-              
-               % end
-                
+         
                 if(class2 ~=1 ) 
                       avg_prob1=sum(probs_box(classes_box == class1))/count1;                    
                       avg_prob2= sum(prob_pred(ind(find(class_pred(ind) == class2))))/count2;
@@ -295,20 +277,16 @@ end
               
                 hold on ;
            
-    end
-    for k=1:length(centers_y)
-         plot(centers_x(k),centers_y(k),'r+','MarkerSize', 12); 
-         rectangle('Position',[min_x(k) min_y(k) widths(k) heights(k)],'EdgeColor','b','LineWidth',1);
-    end 
-       title('Prediction');
-       hold off ;
+               end
+            for k=1:length(centers_y)
+                  plot(centers_x(k),centers_y(k),'r+','MarkerSize', 12); 
+                  rectangle('Position',[min_x(k) min_y(k) widths(k) heights(k)],'EdgeColor','b','LineWidth',1);
+            end 
+             title('Prediction');
+             hold off ;
        
   
-             
-             
-             
-           
-            %[prob_pred,class_pred] = max(prob,[],3) ;
+
     
              subplot(2,2,4);
              image(uint8(class_pred-1)) ;

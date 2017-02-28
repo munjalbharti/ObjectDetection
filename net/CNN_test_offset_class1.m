@@ -75,9 +75,6 @@ function [] = CNN_test_offset_class1()
        opts.nclasses=length(opts.classes);
        fids={};
 
-        %imdb = IMDB.load(opts.imdbPath);
-        %val = find(imdb.set == 2) ;
-  
         ids=textread(VOCopts.seg.imgsetpath,'%s');
         net=get_test_net(opts);
        
@@ -87,14 +84,9 @@ function [] = CNN_test_offset_class1()
         inputVar = 'data' ;
        
         
-       %for i=1:numel(val)
+     
         for i=1:length(ids)
-          %j= val(i);
-          %name=sprintf('img_%d.png',i);
-          %name = imdb.images.filenames{j} ;
-          %rgb=imdb.images.data(:,:,:,j);
-          
-          %rgb=imdb.images{j};
+  
          fprintf('Evaluating image %d\n',i);
          name=sprintf('%s.png',ids{i});
          I_orig = imread([VOCopts.imgpath,sprintf('%s.jpg',ids{i})]);
@@ -124,16 +116,6 @@ function [] = CNN_test_offset_class1()
           prob = gather(net.vars(predVar2).value) ;
           [prob_pred,class_pred] = max(prob,[],3) ;
           
-          %mask =imdb.images.mask(:,:,:,j) ;
-          %orig_offset=mask(:,:,[1,2],:);
-          %orig_class=mask(:,:,[3],:);
-          
-          %orig_offset=imdb.offsets{j};
-          %[orig_x,orig_y,orig_widths,orig_heights]=find_gt_boxes(orig_offset);
-          %orig_class=imdb.labels{j};
-          
-          
-            
           
           switch method
              case 1 
