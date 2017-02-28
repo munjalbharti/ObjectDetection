@@ -1,4 +1,4 @@
-function [] = CNN_multiscale_test_offset_class_size_voc1()
+function [] = CNN_multiscale_test_offset_class_size_voc()
  
         close all;
         clear;
